@@ -52,7 +52,7 @@ export default function About() {
           relevan di setiap momen.
         </p>
 
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 space-y-3">
+        <div className="card p-6 space-y-3">
           <h2 className="text-lg font-semibold text-neutral-900">Informasi Toko</h2>
           <ul className="text-neutral-700 text-sm space-y-1">
             <li>• Lokasi: Jakarta, Indonesia</li>
@@ -65,9 +65,9 @@ export default function About() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-neutral-900">Hubungi Kami</h2>
-        <form onSubmit={handleSubmit} noValidate className="rounded-xl border border-neutral-200 bg-white p-6 space-y-4">
+        <form onSubmit={handleSubmit} noValidate className="card p-6 space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-neutral-800">
+            <label htmlFor="name" className="label">
               Nama
             </label>
             <input
@@ -77,14 +77,13 @@ export default function About() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Nama lengkap"
-              className={`mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none transition
-                ${errors.name && touched.name ? "border-red-400 focus:ring-2 ring-red-200" : "border-neutral-300 focus:ring-2 ring-neutral-200"}`}
+              className={`input ring-focus ${errors.name && touched.name ? "input-invalid" : ""}`}
             />
             {errors.name && touched.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-800">
+            <label htmlFor="email" className="label">
               Email
             </label>
             <input
@@ -95,14 +94,13 @@ export default function About() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="nama@email.com"
-              className={`mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none transition
-                ${errors.email && touched.email ? "border-red-400 focus:ring-2 ring-red-200" : "border-neutral-300 focus:ring-2 ring-neutral-200"}`}
+              className={`input ring-focus ${errors.email && touched.email ? "input-invalid" : ""}`}
             />
             {errors.email && touched.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-neutral-800">
+            <label htmlFor="message" className="label">
               Pesan
             </label>
             <textarea
@@ -113,13 +111,12 @@ export default function About() {
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Tulis pesan kamu…"
-              className={`mt-1 w-full rounded-md border px-3 py-2 text-sm outline-none transition resize-y
-                ${errors.message && touched.message ? "border-red-400 focus:ring-2 ring-red-200" : "border-neutral-300 focus:ring-2 ring-neutral-200"}`}
+              className={`input ring-focus resize-y ${errors.message && touched.message ? "input-invalid" : ""}`}
             />
             {errors.message && touched.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
           </div>
 
-          <button type="submit" className="inline-flex items-center justify-center rounded-md bg-neutral-900 text-white px-4 py-2.5 text-sm font-medium hover:bg-neutral-800">
+          <button type="submit" className="btn btn-primary ring-focus">
             Kirim Pesan
           </button>
         </form>

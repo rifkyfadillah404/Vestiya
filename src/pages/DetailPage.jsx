@@ -104,7 +104,7 @@ export default function DetailPage() {
 
       {/* Main */}
       <section className="grid lg:grid-cols-2 gap-8">
-        <div className="w-110 h-110 aspect-square rounded-lg bg-neutral-100 overflow-hidden">
+        <div className="card overflow-hidden aspect-square">
           <img src={product.image} alt={product.title} className="h-full w-full object-contain" />
         </div>
 
@@ -129,24 +129,26 @@ export default function DetailPage() {
           <p className="text-sm leading-6 text-neutral-700">{product.description}</p>
 
           <div className="flex items-center gap-3">
-            <label htmlFor="qty" className="text-sm text-neutral-700">
+            <label htmlFor="qty" className="label">
               Qty
             </label>
-            <input
-              id="qty"
-              type="number"
-              min={1}
-              value={qty}
-              onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
-              className="w-20 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-500"
-            />
+            <div className="w-24">
+              <input
+                id="qty"
+                type="number"
+                min={1}
+                value={qty}
+                onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
+                className="input ring-focus"
+              />
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button onClick={handleAddToCart} className="inline-flex items-center justify-center rounded-md bg-neutral-900 text-white px-5 py-2.5 text-sm font-medium hover:bg-neutral-800">
+            <button onClick={handleAddToCart} className="btn btn-primary ring-focus">
               Tambah ke Keranjang
             </button>
-            <button onClick={handleBuyNow} className="inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-5 py-2.5 text-sm font-medium hover:bg-neutral-100">
+            <button onClick={handleBuyNow} className="btn btn-outline ring-focus">
               Beli Sekarang
             </button>
           </div>
