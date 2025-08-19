@@ -21,7 +21,9 @@ export default function Home() {
       {/* Hero section */}
       <section className="relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] w-screen overflow-hidden bg-gradient-to-br from-neutral-100 to-neutral-300 border-y border-neutral-300 py-16 px-4 sm:px-6 text-center">
         <h1 className="text-4xl sm:text-5xl font-bold text-neutral-900 tracking-tight">Vestiya</h1>
-        <p className="mt-4 text-neutral-700 max-w-2xl mx-auto">Koleksi pakaian Tshirt dengan nuansa abu dan putih. Nyaman, versatile, dan mudah dipadukan untuk aktivitas harian.</p>
+        <p className="mt-4 text-neutral-700 max-w-2xl mx-auto">
+          Temukan gaya sederhana yang elegan bersama <span className="font-semibold">Vestiya</span>. Koleksi fashion modern dengan sentuhan minimalis, nyaman dipakai, dan mudah dipadukan untuk setiap kesempatan.
+        </p>
         <div className="mt-8 flex items-center justify-center gap-3">
           <Link to="/products" className="inline-flex items-center justify-center rounded-md bg-neutral-500 text-white px-5 py-2.5 text-sm font-medium hover:bg-neutral-700">
             Belanja Sekarang
