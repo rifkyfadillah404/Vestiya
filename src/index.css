@@ -252,3 +252,96 @@ button, input, textarea, select {
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ================================
+   Toast (Nice-looking alerts)
+   ================================ */
+.toast-container {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  z-index: 9999;
+  pointer-events: none; /* allow clicks to pass through gaps */
+}
+
+.toast {
+  pointer-events: auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem .875rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  min-width: 300px;
+  max-width: 420px;
+  animation: toast-in .18s ease-out both;
+  will-change: transform, opacity;
+}
+
+.toast::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+  pointer-events: none;
+}
+
+.toast[data-type="success"],
+.toast.success { border-left: 4px solid #16a34a; } /* green-600 */
+.toast[data-type="error"],
+.toast.error { border-left: 4px solid #dc2626; }   /* red-600 */
+.toast[data-type="info"],
+.toast.info { border-left: 4px solid #2563eb; }    /* blue-600 */
+
+.toast-leading {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: #111827;
+}
+
+.toast .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.toast-dot {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 999px;
+  background: #6b7280; /* neutral-500 */
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.03);
+}
+.toast-dot.success { background: #16a34a; } /* green-600 */
+.toast-dot.error { background: #dc2626; }   /* red-600 */
+.toast-dot.info { background: #2563eb; }    /* blue-600 */
+
+.toast-message {
+  font-size: .875rem;
+  color: var(--text);
+}
+
+.toast-close {
+  height: 2rem;
+  width: 2rem;
+  border-radius: .5rem;
+  margin-left: .25rem;
+  color: #525252;
+}
+.toast-close:hover {
+  background: rgba(0,0,0,0.04);
+  color: #262626;
+}
+
+/* Entrance animation */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}

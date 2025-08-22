@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "../components/toast.jsx";
  
 const formatIDR = (n) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(n);
  
@@ -11,6 +12,7 @@ export default function DetailPage() {
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const { push } = useToast();
  
   useEffect(() => {
     let active = true;
@@ -41,12 +43,12 @@ export default function DetailPage() {
  
   const handleAddToCart = () => {
     if (!product) return;
-    alert(`Ditambahkan ke keranjang: ${product.title} x${qty}`);
+    push(`Ditambahkan ke keranjang: ${product.title} x${qty}`, { type: "success" });
   };
  
   const handleBuyNow = () => {
     if (!product) return;
-    alert(`Checkout cepat: ${product.title} x${qty}`);
+    push(`Checkout cepat: ${product.title} x${qty}`, { type: "success" });
   };
  
   if (loading) {

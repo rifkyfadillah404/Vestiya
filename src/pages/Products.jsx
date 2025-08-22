@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "../components/toast.jsx";
  
 const formatIDR = (n) => new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(n);
  
@@ -10,6 +11,7 @@ export default function Products() {
   const [search, setSearch] = useState("");
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("all");
+  const { push } = useToast();
  
   useEffect(() => {
     axios
@@ -104,7 +106,7 @@ export default function Products() {
                 </h3>
                 <p className="text-sm font-semibold text-neutral-900">{formatIDR(p.price)}</p>
                 <div className="mt-3 flex items-center gap-2">
-                  <button className="btn btn-primary ring-focus" onClick={() => alert(`Ditambahkan ke keranjang: ${p.name}`)}>
+                  <button className="btn btn-primary ring-focus" onClick={() => push(`Ditambahkan ke keranjang: ${p.name}`, { type: "success" })}>
                     Tambah ke Keranjang
                   </button>
                   <Link to={`/products/${p.id}`} className="btn btn-outline ring-focus">
