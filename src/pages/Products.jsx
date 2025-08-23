@@ -38,7 +38,7 @@ export default function Products() {
   return (
     <div className="space-y-8">
       {/* Header + Search */}
-      <header className="text-center space-y-4">
+      <header data-reveal className="text-center space-y-4">
         <h1 className="text-3xl font-bold text-neutral-900">Katalog Produk</h1>
         <p className="text-neutral-600 text-sm">Pilih style minimalis favoritmu dari koleksi terbaik kami.</p>
  
@@ -55,7 +55,7 @@ export default function Products() {
  
         {/* Category filter */}
         {categories.length > 0 && (
-          <div className="flex items-center gap-2 justify-center overflow-x-auto pt-1">
+          <div data-reveal data-reveal-delay="120" className="flex flex-wrap items-center gap-2 justify-center pt-1">
             {["all", ...categories].map((c) => {
               const active = category === c;
               return (
@@ -91,8 +91,8 @@ export default function Products() {
         <p className="text-center text-neutral-600">Produk tidak ditemukan.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredProducts.map((p) => (
-            <article key={p.id} className="group relative card card-hover overflow-hidden flex flex-col bg-white/80 backdrop-blur">
+          {filteredProducts.map((p, i) => (
+            <article data-reveal data-reveal-delay={i * 80} key={p.id} className="group relative card card-hover overflow-hidden flex flex-col bg-white/80 backdrop-blur">
               <Link to={`/products/${p.id}`} className="block relative aspect-square bg-neutral-100 overflow-hidden">
                 <span className="badge absolute left-3 top-3 capitalize">{p.color}</span>
                 <img src={p.image} alt={p.name} className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105" loading="lazy" />

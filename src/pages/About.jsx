@@ -46,7 +46,7 @@ export default function About() {
   return (
     <div className="grid lg:grid-cols-2 gap-10">
       {/* Left: About */}
-      <section className="space-y-4">
+      <section data-reveal className="space-y-4">
         <h1 className="text-3xl font-bold text-neutral-900">Tentang Vestiya</h1>
         <p className="text-neutral-600">
           <span className="font-semibold">Vestiya</span> adalah brand fashion minimalis yang menghadirkan koleksi sederhana namun elegan.
@@ -70,9 +70,9 @@ export default function About() {
       </section>
  
       {/* Right: Contact form */}
-      <section className="space-y-4">
+      <section data-reveal data-reveal-delay="80" className="space-y-4">
         <h2 className="text-2xl font-semibold text-neutral-900">Hubungi Kami</h2>
-        <form onSubmit={handleSubmit} noValidate className="card p-6 bg-white/80 backdrop-blur space-y-4">
+        <form data-reveal data-reveal-delay="120" onSubmit={handleSubmit} noValidate className="card p-6 bg-white/80 backdrop-blur space-y-4">
           {/* Name */}
           <div>
             <label htmlFor="name" className="label">Nama</label>

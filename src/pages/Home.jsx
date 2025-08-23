@@ -28,7 +28,7 @@ export default function Home() {
           <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-neutral-200/60 blur-3xl" />
         </div>
 
-        <div className="relative z-10 text-center max-w-3xl mx-auto">
+        <div data-reveal className="relative z-10 text-center max-w-3xl mx-auto">
 
           <h1 className="mt-4 text-5xl sm:text-6xl font-extrabold text-neutral-900 tracking-tight">
             Vestiya
@@ -53,17 +53,17 @@ export default function Home() {
 
       {/* Highlight section */}
       <section id="highlight" className="grid sm:grid-cols-3 gap-6">
-        <div className="group card card-hover p-6 bg-white/80 backdrop-blur">
+        <div data-reveal data-reveal-delay="0" className="group card card-hover p-6 bg-white/80 backdrop-blur">
           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 border border-neutral-200 text-xl">🚚</div>
           <h3 className="mt-3 font-semibold text-neutral-900">Pengiriman Cepat</h3>
           <p className="mt-1 text-sm text-neutral-600">Order diproses 1x24 jam, pengiriman ke seluruh Indonesia.</p>
         </div>
-        <div className="group card card-hover p-6 bg-white/80 backdrop-blur">
+        <div data-reveal data-reveal-delay="80" className="group card card-hover p-6 bg-white/80 backdrop-blur">
           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 border border-neutral-200 text-xl">🧵</div>
           <h3 className="mt-3 font-semibold text-neutral-900">Bahan Berkualitas</h3>
           <p className="mt-1 text-sm text-neutral-600">Material nyaman dan tahan lama dengan warna netral elegan.</p>
         </div>
-        <div className="group card card-hover p-6 bg-white/80 backdrop-blur">
+        <div data-reveal data-reveal-delay="160" className="group card card-hover p-6 bg-white/80 backdrop-blur">
           <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-100 border border-neutral-200 text-xl">💬</div>
           <h3 className="mt-3 font-semibold text-neutral-900">Dukungan Pelanggan</h3>
           <p className="mt-1 text-sm text-neutral-600">Tim kami siap membantu melalui chat setiap hari.</p>
@@ -72,7 +72,7 @@ export default function Home() {
 
       {/* Featured section */}
       <section className="space-y-6">
-        <div className="flex items-end justify-between">
+        <div data-reveal className="flex items-end justify-between">
           <div>
             <h2 className="text-xl font-semibold text-neutral-900">Produk Unggulan</h2>
             <p className="text-sm text-neutral-600">Pilihan terbaik dari koleksi kami.</p>
@@ -99,8 +99,8 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid sm:grid-cols-3 gap-6">
-            {featured.map((p) => (
-              <article key={p.id} className="group relative card card-hover overflow-hidden">
+            {featured.map((p, i) => (
+              <article data-reveal data-reveal-delay={i * 80} key={p.id} className="group relative card card-hover overflow-hidden">
                 <div className="aspect-square overflow-hidden bg-neutral-100">
                   <img
                     src={p.image}

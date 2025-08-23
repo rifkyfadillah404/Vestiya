@@ -88,7 +88,7 @@ export default function DetailPage() {
   return (
     <div className="space-y-10">
       {/* Breadcrumbs */}
-      <nav className="text-sm text-neutral-600">
+      <nav data-reveal className="text-sm text-neutral-600">
         <ol className="flex items-center gap-2">
           <li>
             <Link className="hover:text-neutral-900 inline-flex items-center gap-1" to="/">
@@ -116,14 +116,14 @@ export default function DetailPage() {
       {/* Main */}
       <section className="grid lg:grid-cols-2 gap-8">
         {/* Image */}
-        <div className="lg:sticky lg:top-24 card overflow-hidden bg-white/80 backdrop-blur shadow-soft">
+        <div data-reveal className="lg:sticky lg:top-24 card overflow-hidden bg-white/80 backdrop-blur shadow-soft w-full mx-auto max-w-[200px] sm:max-w-[240px] md:max-w-[320px] lg:max-w-none">
           <div className="aspect-square grid place-items-center bg-neutral-50">
-            <img src={product.image} alt={product.title} className="h-full w-full object-contain p-6" />
+            <img src={product.image} alt={product.title} className="h-full w-full object-contain p-2 sm:p-4 max-h-56 sm:max-h-72 md:max-h-80 lg:max-h-none" />
           </div>
         </div>
  
         {/* Details */}
-        <div className="space-y-6">
+        <div data-reveal data-reveal-delay="120" className="space-y-6">
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               {product.category && <span className="badge capitalize">{product.category}</span>}
@@ -193,3 +193,4 @@ export default function DetailPage() {
     </div>
   );
 }
+
