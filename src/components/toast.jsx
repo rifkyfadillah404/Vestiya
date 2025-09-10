@@ -1,78 +1,130 @@
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useState, useCallback, useEffect } from "react";
 
-const ToastContext = createContext(null);
+const ToastContext = createContext();
 
-function ToastIcon({ type }) {
-  if (type === "success") {
-    return (
-      <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-      </svg>
-    );
+const DEFAULT_TOAST = {
+  id: null,
+  message: "",
+  type: "info", // 'success' | 'error' | 'info'
+};
+
+export function useToast() {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error("useToast must be used within a ToastProvider");
   }
-  if (type === "error") {
-    return (
-      <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    );
-  }
-  return (
-    <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01" />
-    </svg>
-  );
+  return context;
 }
 
-export function ToastProvider({ children, defaultDuration = 2500 }) {
+export default function ToastProvider({ children }) {
   const [toasts, setToasts] = useState([]);
 
-  const remove = useCallback((id) => {
-    setToasts((list) => list.filter((t) => t.id !== id));
+  const push = useCallback((message, options = {}) => {
+    const id = Date.now() + Math.random();
+    const newToast = {
+      id,
+      message,
+      type: options.type || DEFAULT_TOAST.type,
+      duration: options.duration || 5000,
+    };
+
+    setToasts((prev) => [...prev, newToast]);
+
+    // Auto remove toast
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id));
+    }, newToast.duration);
   }, []);
 
-  const push = useCallback(
-    (message, opts = {}) => {
-      const id = Math.random().toString(36).slice(2);
-      const type = opts.type || "success";
-      const duration = typeof opts.duration === "number" ? opts.duration : defaultDuration;
-      setToasts((list) => [...list, { id, message, type }]);
-      if (duration > 0) {
-        window.setTimeout(() => remove(id), duration);
-      }
-      return id;
-    },
-    [defaultDuration, remove]
-  );
-
-  const value = useMemo(() => ({ push, remove }), [push, remove]);
+  const remove = useCallback((id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   return (
-    <ToastContext.Provider value={value}>
+    <ToastContext.Provider value={{ push, remove }}>
       {children}
-      <div className="toast-container" role="status" aria-live="polite" aria-atomic="true">
-        {toasts.map((t) => (
-          <div key={t.id} className={`toast ${t.type}`} data-type={t.type}>
+      <div className="toast-container">
+        {toasts.map((toast) => (
+          <div
+            key={toast.id}
+            className={`toast ${toast.type} rounded-xl`}
+            role="alert"
+            aria-live="polite"
+          >
             <div className="toast-leading">
-              <span className={`toast-dot ${t.type}`} aria-hidden="true" />
-              <ToastIcon type={t.type} />
+              {toast.type === "success" && (
+                <svg
+                  className="icon text-emerald-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              )}
+              {toast.type === "error" && (
+                <svg
+                  className="icon text-red-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              )}
+              {toast.type === "info" && (
+                <svg
+                  className="icon text-blue-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              )}
             </div>
-            <div className="toast-message">{t.message}</div>
-            <button className="toast-close btn btn-ghost ring-focus" aria-label="Tutup notifikasi" onClick={() => remove(t.id)}>
-              ×
+            <div className="toast-message font-medium">{toast.message}</div>
+            <button
+              className="toast-close"
+              onClick={() => remove(toast.id)}
+              aria-label="Close notification"
+            >
+              <svg
+                className="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </button>
           </div>
         ))}
       </div>
     </ToastContext.Provider>
   );
-}
-
-/* eslint-disable-next-line react-refresh/only-export-components */
-export function useToast() {
-  const ctx = useContext(ToastContext);
-  if (!ctx) {
-    throw new Error("useToast must be used within ToastProvider");
-  }
-  return ctx;
 }
