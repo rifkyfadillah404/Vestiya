@@ -1,12 +1,81 @@
-# React + Vite
+# Vestiya
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Vestiya is a web application built with React and Bre Framework.
 
-Currently, two official plugins are available:
+## 🚀 Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these steps to clone, set up, and run this project locally.
 
-## Expanding the ESLint configuration
+### 1. Clone the Repository
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone https://github.com/rifkyfadillah404/Vestiya.git
+cd Vestiya
+```
+
+### 2. Install Dependencies
+
+Make sure you have **Node.js** and **npm** (or **yarn**) installed.
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Install Bre CLI (if required)
+
+If Bre Framework requires a CLI tool, install it globally:
+
+```bash
+npm install -g bre-cli
+# or
+yarn global add bre-cli
+```
+
+*(If Bre CLI is not required, you can skip this step.)*
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Your app should now be running at [http://localhost:3000](http://localhost:3000) (or the port set by Bre Framework).
+
+### 5. Build for Production
+
+To create an optimized production build:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+### 6. Additional Commands (Bre Framework)
+
+Consult the [Bre Framework documentation](https://bre-framework.com/) for more advanced commands and configuration options.
+
+## 📦 Project Structure
+
+- `/src` — Main source code (React components, pages, etc.)
+- `/public` — Static files
+
+## ❓ FAQ
+
+- **Do I need to install Bre CLI?**
+  - If the framework or project setup requires it, follow step 3 above.
+
+- **How do I customize the configuration?**
+  - Check the documentation or config files in the project root.
+
+## 📄 License
+
+MIT License.
+
+---
+
+> For questions or issues, create a [GitHub issue here](https://github.com/rifkyfadillah404/Vestiya/issues).
